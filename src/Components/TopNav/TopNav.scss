@@ -1,0 +1,17 @@
+@import "../../sass/variables";
+
+.top-nav-container {
+  width: 100%;
+  height: 50px;
+  min-height: 50px;
+  border-bottom: 1px solid $gray;
+  position: fixed;
+  z-index: 3;
+  background-color: #23272a;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  .search-bar-container{
+      width: 40vw;
+  }
+}

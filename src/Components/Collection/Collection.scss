@@ -1,0 +1,74 @@
+@import "../../sass/variables";
+
+.collection-container {
+  height: 100vh;
+  background-color: #23272a;
+  margin-top: 50px;
+  z-index: 1;
+  width: 80vw;
+  margin-left: 20vw;
+  .collection-top-bar {
+    // width: 80%;
+    margin-top: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    .create-note-container {
+      border: 1px solid $gray;
+      border-radius: 10px;
+      width: 500px;
+      &:hover {
+        box-shadow: 0 0 3px 4px rgba(27, 27, 27, 0.685);
+        border: 1px solid $blue;
+        cursor: pointer;
+      }
+      .note-title-container,
+      .note-content-container,
+      .add-button-container {
+        width: 450px;
+        margin: auto;
+      }
+      .add-button-container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        height: 40px;
+      }
+    }
+    .collection-name-container {
+      display: flex;
+      color: $c2;
+      height: 100%;
+      width: 100px;
+      text-transform: uppercase;
+      align-items: flex-start;
+      font-family: $roboto;
+      letter-spacing: 3px;
+      h1 {
+        margin: 0 auto auto auto;
+      }
+    }
+  }
+  .notes-container {
+    display: grid;
+    grid-gap: 20px;
+    grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
+    position: relative;
+    margin: 50px auto;
+    align-items: stretch;
+    width: 80%;
+  }
+  .empty-collection-container {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    height: 100px;
+    margin: auto;
+    h3 {
+      font-size: 2rem;
+      margin: auto;
+      color: $c2;
+      font-family: $openSans;
+    }
+  }
+}

@@ -1,0 +1,109 @@
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,600;0,700;0,800;1,300;1,400;1,600;1,700;1,800&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap");
+.collection-container {
+  height: 100vh;
+  background-color: #23272a;
+  margin-top: 50px;
+  z-index: 1;
+  width: 80vw;
+  margin-left: 20vw;
+}
+
+.collection-container .collection-top-bar {
+  margin-top: 50px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+}
+
+.collection-container .collection-top-bar .create-note-container {
+  border: 1px solid #99aab5;
+  border-radius: 10px;
+  width: 500px;
+}
+
+.collection-container .collection-top-bar .create-note-container:hover {
+  -webkit-box-shadow: 0 0 3px 4px rgba(27, 27, 27, 0.685);
+          box-shadow: 0 0 3px 4px rgba(27, 27, 27, 0.685);
+  border: 1px solid #7289da;
+  cursor: pointer;
+}
+
+.collection-container .collection-top-bar .create-note-container .note-title-container,
+.collection-container .collection-top-bar .create-note-container .note-content-container,
+.collection-container .collection-top-bar .create-note-container .add-button-container {
+  width: 450px;
+  margin: auto;
+}
+
+.collection-container .collection-top-bar .create-note-container .add-button-container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  height: 40px;
+}
+
+.collection-container .collection-top-bar .collection-name-container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  color: #ffffffab;
+  height: 100%;
+  width: 100px;
+  text-transform: uppercase;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
+  font-family: "Roboto", sans-serif;
+  letter-spacing: 3px;
+}
+
+.collection-container .collection-top-bar .collection-name-container h1 {
+  margin: 0 auto auto auto;
+}
+
+.collection-container .notes-container {
+  display: -ms-grid;
+  display: grid;
+  grid-gap: 20px;
+  -ms-grid-columns: (minmax(270px, 1fr))[auto-fill];
+      grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
+  position: relative;
+  margin: 50px auto;
+  -webkit-box-align: stretch;
+      -ms-flex-align: stretch;
+          align-items: stretch;
+  width: 80%;
+}
+
+.collection-container .empty-collection-container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  height: 100px;
+  margin: auto;
+}
+
+.collection-container .empty-collection-container h3 {
+  font-size: 2rem;
+  margin: auto;
+  color: #ffffffab;
+  font-family: "Open Sans", sans-serif;
+}
+/*# sourceMappingURL=Collection.css.map */
