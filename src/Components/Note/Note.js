@@ -15,7 +15,6 @@ const Note = (props) => {
   const classes = useStyles();
   const [title, setTitle] = useState(note_title);
   const [content, setContent] = useState(note_content);
-  const [isEditing, setIsEditing] = useState(false);
   const within = useRef();
 
   useEffect(() => {
@@ -44,7 +43,6 @@ const Note = (props) => {
     }
 
     editNote();
-    
   };
 
   return (
@@ -56,6 +54,7 @@ const Note = (props) => {
           disableUnderline={true}
           onChange={(e) => setTitle(e.target.value)}
           multiline
+          placeholder={note_title === "" ? "Empty Note" : null}
         />
       </div>
       <div className='note-content-container'>

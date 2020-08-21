@@ -35,28 +35,6 @@
       }
     }
   }
-  .collection-name-link {
-    text-decoration: none;
-    width: 100%;
-    .collection-name-container {
-      width: 30%;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      border: 1px solid $gray;
-      border-radius: 40px;
-      font-family: $roboto;
-      color: $c1;
-      font-weight: 100;
-      letter-spacing: 2px;
-      font-size: small;
-      margin: auto;
-      &:hover {
-        background-color: rgba(207, 207, 207, 0.178);
-        border-color: $blue;
-      }
-    }
-  }
   .nav-seperator {
     color: $c1;
     display: flex;

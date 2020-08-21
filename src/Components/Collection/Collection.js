@@ -1,12 +1,14 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import { createClient } from "@supabase/supabase-js";
 import "./Collection.css";
 import Input from "@material-ui/core/Input";
 import AddCircleIcon from "@material-ui/icons/AddCircle";
 import RemoveCircleIcon from "@material-ui/icons/RemoveCircle";
+import CircularProgress from "@material-ui/core/CircularProgress";
 import { makeStyles } from "@material-ui/core/styles";
 import { withRouter } from "react-router-dom";
-import Note from "./Note/Note";
+import { connect } from "react-redux";
+import Note from "../Note/Note";
 import SpeakerNotesIcon from "@material-ui/icons/SpeakerNotes";
 
 const Collection = (props) => {
@@ -18,14 +20,15 @@ const Collection = (props) => {
   const [isCreating, setIsCreating] = useState(false);
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
+  const [loading, setLoading] = useState("");
   const classes = useStyles();
-  //   const within = useRef()
 
   useEffect(() => {
     getCollectionNotes();
   }, [props.match.params.collectionid]);
 
   const getCollectionNotes = async () => {
+    setLoading(true);
     try {
       let { body: notes } = await supabase
         .from("notes")
@@ -33,6 +36,7 @@ const Collection = (props) => {
         .order("id")
         .select("*");
       setCollectionNotes(notes);
+      setLoading(false);
     } catch (err) {
       console.log(err);
     }
@@ -83,13 +87,6 @@ const Collection = (props) => {
     return <Note deleteNote={deleteNote} key={e.id} note={e} />;
   });
 
-  //   const handleClick = (e) => {
-  //     if (within.current.contains(e.target)) {
-  //       return;
-  //     }
-
-  //     createCollectionNote();
-  //   };
 
   return (
     <div className='collection-container'>
@@ -112,6 +109,7 @@ const Collection = (props) => {
                 className={classes.bottomInput}
                 placeholder='Content'
                 fullWidth={true}
+                maxLength="5000"
               />
             </div>
             <div className='add-button-container'>
@@ -141,19 +139,33 @@ const Collection = (props) => {
           </div>
         )}
       </div>
-      {notesMap.length === 0 ? (
+      {loading === true ? (
+        <div className='loading-container'>
+          <CircularProgress />
+        </div>
+      ) : notesMap.length === 0 ? (
         <div className='empty-collection-container'>
           <SpeakerNotesIcon className={classes.draftIcon} />
           <h3>No notes in this collection</h3>
         </div>
       ) : (
-        <div className='notes-container'>{notesMap}</div>
+        <div
+          className={
+            props.toggleView === true
+              ? "notes-container-list"
+              : "notes-container"
+          }
+        >
+          {notesMap}
+        </div>
       )}
     </div>
   );
 };
 
-export default withRouter(Collection);
+const mapStateToProps = (reduxState) => reduxState;
+
+export default withRouter(connect(mapStateToProps, null)(Collection));
 
 const useStyles = makeStyles((theme) => ({
   root: {

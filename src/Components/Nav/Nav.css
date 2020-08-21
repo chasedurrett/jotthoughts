@@ -54,37 +54,6 @@
   text-decoration: underline;
 }
 
-.nav-container .collection-name-link {
-  text-decoration: none;
-  width: 100%;
-}
-
-.nav-container .collection-name-link .collection-name-container {
-  width: 30%;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  border: 1px solid #99aab5;
-  border-radius: 40px;
-  font-family: "Roboto", sans-serif;
-  color: #ffffff;
-  font-weight: 100;
-  letter-spacing: 2px;
-  font-size: small;
-  margin: auto;
-}
-
-.nav-container .collection-name-link .collection-name-container:hover {
-  background-color: rgba(207, 207, 207, 0.178);
-  border-color: #7289da;
-}
-
 .nav-container .nav-seperator {
   color: #ffffff;
   display: -webkit-box;

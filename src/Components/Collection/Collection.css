@@ -1,6 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,600;0,700;0,800;1,300;1,400;1,600;1,700;1,800&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap");
 .collection-container {
-  height: 100vh;
   background-color: #23272a;
   margin-top: 50px;
   z-index: 1;
@@ -86,24 +85,55 @@
   width: 80%;
 }
 
+.collection-container .notes-container-list {
+  display: -ms-grid;
+  display: grid;
+  grid-gap: 20px;
+  -ms-grid-columns: (minmax(270px, 1fr))[auto-fill];
+      grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
+  position: relative;
+  margin: 50px auto;
+  -webkit-box-align: stretch;
+      -ms-flex-align: stretch;
+          align-items: stretch;
+  width: 30%;
+}
+
 .collection-container .empty-collection-container {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  -webkit-box-align: start;
-      -ms-flex-align: start;
-          align-items: flex-start;
+  -webkit-box-align: end;
+      -ms-flex-align: end;
+          align-items: flex-end;
   -webkit-box-pack: justify;
       -ms-flex-pack: justify;
           justify-content: space-between;
-  height: 100px;
+  height: 300px;
+  width: 40%;
   margin: auto;
 }
 
 .collection-container .empty-collection-container h3 {
   font-size: 2rem;
-  margin: auto;
+  margin-right: 40px;
+  margin: 0 0 8px 0;
   color: #ffffffab;
   font-family: "Open Sans", sans-serif;
+}
+
+.collection-container .loading-container {
+  margin: auto;
+  height: 200px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: end;
+      -ms-flex-align: end;
+          align-items: flex-end;
+  width: 100px;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
 }
 /*# sourceMappingURL=Collection.css.map */

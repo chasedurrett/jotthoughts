@@ -1,7 +1,7 @@
 @import "../../sass/variables";
 
 .collection-container {
-  height: 100vh;
+
   background-color: #23272a;
   margin-top: 50px;
   z-index: 1;
@@ -58,17 +58,36 @@
     align-items: stretch;
     width: 80%;
   }
+  .notes-container-list {
+    display: grid;
+    grid-gap: 20px;
+    grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
+    position: relative;
+    margin: 50px auto;
+    align-items: stretch;
+    width: 30%;
+  }
   .empty-collection-container {
     display: flex;
-    align-items: flex-start;
+    align-items: flex-end;
     justify-content: space-between;
-    height: 100px;
+    height: 300px;
+    width: 40%;
     margin: auto;
     h3 {
       font-size: 2rem;
-      margin: auto;
+      margin-right: 40px;
+      margin: 0 0 8px 0;
       color: $c2;
       font-family: $openSans;
     }
+  }
+  .loading-container {
+    margin: auto;
+    height: 200px;
+    display: flex;
+    align-items: flex-end;
+    width: 100px;
+    justify-content: center;
   }
 }

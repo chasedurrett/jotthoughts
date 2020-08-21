@@ -1,0 +1,36 @@
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,600;0,700;0,800;1,300;1,400;1,600;1,700;1,800&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap");
+.collection-preview-container {
+  width: 100%;
+}
+
+.collection-preview-container .collection-name-link {
+  text-decoration: none;
+  width: 100%;
+}
+
+.collection-preview-container .collection-name-link .collection-name-container {
+  width: 30%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  border: 1px solid #99aab5;
+  border-radius: 40px;
+  font-family: "Roboto", sans-serif;
+  color: #ffffff;
+  font-weight: 100;
+  letter-spacing: 2px;
+  font-size: small;
+  margin: auto;
+}
+
+.collection-preview-container .collection-name-link .collection-name-container:hover {
+  background-color: rgba(207, 207, 207, 0.178);
+  border-color: #7289da;
+}
+/*# sourceMappingURL=CollectionPreview.css.map */

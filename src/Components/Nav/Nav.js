@@ -8,6 +8,8 @@ import Input from "@material-ui/core/Input";
 import FiberManualRecordIcon from "@material-ui/icons/FiberManualRecord";
 import RemoveIcon from "@material-ui/icons/Remove";
 import AddIcon from "@material-ui/icons/Add";
+import data from "../Data/MOCK_DATA(1).json";
+import CollectionPreview from "../CollectionPreview/CollectionPreview";
 // require("dotenv").config();
 
 const Nav = () => {
@@ -20,6 +22,7 @@ const Nav = () => {
   const [collections, setCollections] = useState([]);
   const [isAdding, setIsAdding] = useState(false);
   const [name, setName] = useState("");
+  const [chosen, setChosen] = useState("");
 
   useEffect(() => {
     getCollections();
@@ -34,12 +37,19 @@ const Nav = () => {
     }
   };
 
+  let randomName;
+  if (name === "") {
+    randomName = data[Math.floor(Math.random() * data.length)];
+    setName(randomName.word);
+  }
+
   const createCollection = async () => {
     try {
       await supabase.from("collections").insert([{ collection_name: name }]);
       let res = await supabase.from("collections").select("*");
       await setIsAdding(false);
       setCollections(res.body);
+      setName("");
     } catch (err) {
       console.log(err);
     }
@@ -47,35 +57,12 @@ const Nav = () => {
 
   const collectionsMap = collections.map((e) => {
     return (
-      <Link
+      <CollectionPreview
         key={e.id}
-        className='collection-name-link'
-        to={`/collections/${e.id}`}
-      >
-        <Button variant='outlined' className={classes.button}>
-          <span
-            style={{
-              width: 85,
-              display: "flex",
-              justifyContent: "flex-start",
-              alignItems: "center",
-            }}
-          >
-            {" "}
-            <FiberManualRecordIcon className={classes.nav} />
-          </span>{" "}
-          <span
-            style={{
-              width: 85,
-              display: "flex",
-              justifyContent: "flex-start",
-              alignItems: "center",
-            }}
-          >
-            {e.collection_name}
-          </span>
-        </Button>
-      </Link>
+        onClick={() => setChosen(e)}
+        collection={e}
+        active={e === chosen}
+      />
     );
   });
 
@@ -126,6 +113,7 @@ const Nav = () => {
               id='standard-basic'
               label='Collection Name'
               placeholder='Name'
+              disableUnderline={true}
             />
             <div className='add-collection-form-p'>
               <p onClick={() => createCollection()}>Add</p>
@@ -166,14 +154,7 @@ const useStyles = makeStyles((theme) => ({
     borderTopRightRadius: 15,
     borderBottomRightRadius: 15,
     "&:hover": {
-      backgroundColor: "rgba(255, 255, 255, 0.044)",
-      borderTopRightRadius: 15,
-      borderBottomRightRadius: 15,
-    },
-    "&:focus": {
-      borderColor: "#07c537",
-      border: "solid 1px",
-      borderLeft: "none",
+      backgroundColor: "#7289da73",
       borderTopRightRadius: 15,
       borderBottomRightRadius: 15,
     },
@@ -195,10 +176,14 @@ const useStyles = makeStyles((theme) => ({
     margin: "auto",
     color: "#ffffff",
     marginTop: 10,
+    borderBottom: "1px solid #ffffff",
   },
   nav: {
     color: "#7289da",
     height: 10,
     width: 10,
+  },
+  navActive: {
+    color: "#86FFCE",
   },
 }));
