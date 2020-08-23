@@ -1,10 +1,10 @@
 const initialState = {
   toggleView: false,
-  toggleTheme: false,
+  toggleDark: true,
 };
 
 const TOGGLED_VIEW = "TOGGLED_VIEW";
-const TOGGLED_THEME = "TOGGLED_THEME";
+const TOGGLED_DARK_THEME = "TOGGLED_DARK_THEME";
 
 export function toggledView(bool) {
   return {
@@ -13,9 +13,9 @@ export function toggledView(bool) {
   };
 }
 
-export function toggledTheme(bool) {
+export function toggledDarkTheme(bool) {
   return {
-    type: TOGGLED_THEME,
+    type: TOGGLED_DARK_THEME,
     payload: bool,
   };
 }
@@ -27,10 +27,10 @@ export default function reducer(state = initialState, action) {
         ...state,
         toggleView: action.payload,
       };
-    case TOGGLED_THEME:
+    case TOGGLED_DARK_THEME:
       return {
         ...state,
-        toggleTheme: action.payload,
+        toggleDark: action.payload,
       };
     default:
       return state;

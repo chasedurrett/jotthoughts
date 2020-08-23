@@ -1,10 +1,21 @@
 import React from "react";
 import "./Home.css";
+import { connect } from "react-redux";
 
-const Home = () => {
-  return <div className='home-container'>
+const Home = (props) => {
+  const { toggleDark } = props;
+
+  return (
+    <div
+      className={
+        toggleDark === true ? "home-container-light" : "home-container"
+      }
+    >
       <h2>Create a collection to get started</h2>
-  </div>;
+    </div>
+  );
 };
 
-export default Home;
+const mapStateToProps = (reduxState) => reduxState;
+
+export default connect(mapStateToProps, null)(Home);

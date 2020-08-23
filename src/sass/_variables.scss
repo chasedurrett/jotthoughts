@@ -1,22 +1,30 @@
 @import url("https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,600;0,700;0,800;1,300;1,400;1,600;1,700;1,800&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Comfortaa:wght@300;400;500;600;700&display=swap");
 
 // FONTS //
 $roboto: "Roboto", sans-serif;
 $openSans: "Open Sans", sans-serif;
+$logo: "Comfortaa", cursive;
 
 // COLORS //
 $white: #ffffff;
 $gray: #99aab5;
-$black: #2c2f33 ;
-$blue: #7289da ;
-$green: #86FFCE;
+$black: #2c2f33;
+$blue: #7289da;
+$green: #86ffce;
+$smoke: #f7f7f7;
 
-
-// TEXT COLOR // 
+// TEXT COLOR //
 $c1: #ffffff;
 $c2: #ffffffab;
 
+// TEXT COLOR LIGHT THEME //
+$lc1: #2c2f33;
+$lc2: #2c2f3393;
 
 $whitesdrgba: rgba(255, 255, 255, 0.274);
 
-$sadgsadf: #7289da73;
+$sadgsadf: #ffffff54;
+
+$sadgsdfsadf: #c7c7c7;
+

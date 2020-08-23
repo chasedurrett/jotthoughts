@@ -11,14 +11,14 @@ import "./Search.css";
 
 const Search = (props) => {
   const SUPABASE_URL = "https://kfvonrpponseevqsueft.supabase.co";
-  const SUPABASE_KEY =
-    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYW5vbiIsImlhdCI6MTU5Nzk0NTgzOSwiZXhwIjoxOTEzNTIxODM5fQ.zOLyrCMW80rcc9zwiPdCDbJa0bdbPztAzusEM9vsSiI";
-  const supabase = createClient(SUPABASE_URL, SUPABASE_KEY);
+  const { REACT_APP_SUPABASE_KEY } = process.env;
+  const supabase = createClient(SUPABASE_URL, REACT_APP_SUPABASE_KEY);
   const location = useLocation();
   let searchParam = location.search;
   const classes = useStyles();
   const [loading, setLoading] = useState("");
   const [collectionNotes, setCollectionNotes] = useState([]);
+  const { toggleDark } = props;
 
   useEffect(() => {
     getCollectionNotes();
@@ -58,7 +58,11 @@ const Search = (props) => {
   });
 
   return (
-    <div className='search-container'>
+    <div
+      className={
+        toggleDark === true ? "search-container-light" : "search-container"
+      }
+    >
       {loading === true ? (
         <div className='loading-container-2'>
           <CircularProgress />

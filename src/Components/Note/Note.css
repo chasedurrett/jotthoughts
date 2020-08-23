@@ -1,4 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,600;0,700;0,800;1,300;1,400;1,600;1,700;1,800&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Comfortaa:wght@300;400;500;600;700&display=swap");
 .note-container {
   position: relative;
   grid-column: auto;
@@ -37,12 +38,60 @@
 .note-container:focus {
   -webkit-box-shadow: 0 0 3px 4px rgba(27, 27, 27, 0.685);
           box-shadow: 0 0 3px 4px rgba(27, 27, 27, 0.685);
-  border: 1px solid #86FFCE;
+  border: 1px solid #86ffce;
   cursor: pointer;
 }
 
 .note-container .note-title-container,
 .note-container .note-content-container {
+  width: 90%;
+  margin: auto;
+}
+
+.note-container-light {
+  position: relative;
+  grid-column: auto;
+  -ms-flex-item-align: stretch;
+      -ms-grid-row-align: stretch;
+      align-self: stretch;
+  min-height: 150px;
+  grid-row: auto;
+  border: 1px solid #99aab5;
+  border-radius: 10px;
+  background-color: #f7f7f7;
+  color: #2c2f33;
+  -webkit-transition: all ease 400ms;
+  transition: all ease 400ms;
+}
+
+.note-container-light .delete-icon {
+  display: none;
+  -webkit-transition: all ease 400ms;
+  transition: all ease 400ms;
+}
+
+.note-container-light:hover {
+  -webkit-box-shadow: 0 0 3px 4px rgba(27, 27, 27, 0.116);
+          box-shadow: 0 0 3px 4px rgba(27, 27, 27, 0.116);
+  border: 1px solid #7289da;
+  cursor: pointer;
+}
+
+.note-container-light:hover .delete-icon {
+  -webkit-transition: all ease 400ms;
+  transition: all ease 400ms;
+  display: initial;
+}
+
+.note-container-light:focus {
+  -webkit-box-shadow: 0 0 3px 4px rgba(27, 27, 27, 0.116);
+          box-shadow: 0 0 3px 4px rgba(27, 27, 27, 0.116);
+  border: 1px solid #86ffce;
+  cursor: pointer;
+}
+
+.note-container-light .note-title-container,
+.note-container-light .note-content-container {
   width: 90%;
   margin: auto;
 }

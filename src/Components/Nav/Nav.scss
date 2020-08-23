@@ -1,13 +1,32 @@
 @import "../../sass/variables";
 
+// .nav-container::-webkit-scrollbar {
+//   display: none;
+//   &:hover {
+//     display: inherit;
+//   }
+// }
 .nav-container {
-  height: 100vh;
+  height: calc(100vh - 50px);
   margin-top: 50px;
   background-color: #23272a;
   z-index: 2;
   width: 20vw;
   min-width: 180px;
   position: fixed;
+  overflow-y: scroll;
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+  &::-webkit-scrollbar {
+    display: none;
+  }
+  // &:hover {
+  //   -ms-overflow-style: inherit; /* IE and Edge */
+  //   scrollbar-width: inherit; /* Firefox */
+  //   .nav-container::-webkit-scrollbar {
+  //     display: inherit;
+  //   }
+  // }
   .nav-input-container {
     max-height: 300px;
     display: flex;
@@ -56,5 +75,84 @@
     justify-content: flex-start;
     align-items: flex-start;
     width: 100%;
+  }
+}
+
+// .nav-container-light::-webkit-scrollbar {
+//   display: none;
+//   &:hover {
+//     display: inherit;
+//   }
+// }
+.nav-container-light {
+  height: calc(100vh - 50px);
+  margin-top: 50px;
+  background-color: $smoke;
+  z-index: 2;
+  width: 20vw;
+  min-width: 180px;
+  position: fixed;
+  overflow-y: scroll;
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+  &::-webkit-scrollbar {
+    display: none;
+  }
+  // &:hover {
+  //   -ms-overflow-style: inherit; /* IE and Edge */
+  //   scrollbar-width: inherit; /* Firefox */
+  //   .nav-container-light::-webkit-scrollbar {
+  //     display: inherit;
+  //   }
+  // }
+  .nav-input-container {
+    max-height: 300px;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    justify-content: flex-start;
+    .toggled-nav-input-container {
+      width: 100%;
+      .add-collection-form-p {
+        display: flex;
+        justify-content: flex-end;
+        width: 70%;
+        align-items: center;
+        font-size: smaller;
+        font-family: $openSans;
+        color: $lc1;
+        margin-top: 20px;
+        p {
+          &:hover {
+            cursor: pointer;
+            text-decoration: underline;
+          }
+        }
+      }
+    }
+  }
+  .nav-seperator {
+    color: $lc1;
+    display: flex;
+    align-items: baseline;
+    justify-content: center;
+    div {
+      width: 60%;
+      margin-left: 8px;
+      border-bottom: solid 1px $black;
+    }
+    p {
+      font-family: $openSans;
+      font-size: small;
+    }
+  }
+  .nav-collections-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    width: 100%;
+    // overflow-y: scroll;
   }
 }

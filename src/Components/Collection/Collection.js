@@ -13,15 +13,16 @@ import SpeakerNotesIcon from "@material-ui/icons/SpeakerNotes";
 
 const Collection = (props) => {
   const SUPABASE_URL = "https://kfvonrpponseevqsueft.supabase.co";
-  const SUPABASE_KEY =
-    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYW5vbiIsImlhdCI6MTU5Nzk0NTgzOSwiZXhwIjoxOTEzNTIxODM5fQ.zOLyrCMW80rcc9zwiPdCDbJa0bdbPztAzusEM9vsSiI";
-  const supabase = createClient(SUPABASE_URL, SUPABASE_KEY);
+  const { REACT_APP_SUPABASE_KEY } = process.env;
+  const supabase = createClient(SUPABASE_URL, REACT_APP_SUPABASE_KEY);
   const [collectionNotes, setCollectionNotes] = useState([]);
   const [isCreating, setIsCreating] = useState(false);
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const [loading, setLoading] = useState("");
   const classes = useStyles();
+  const classesLight = useStylesLight();
+  const { toggleDark } = props;
 
   useEffect(() => {
     getCollectionNotes();
@@ -87,15 +88,22 @@ const Collection = (props) => {
     return <Note deleteNote={deleteNote} key={e.id} note={e} />;
   });
 
-
   return (
-    <div className='collection-container'>
+    <div
+      className={
+        toggleDark === true
+          ? "collection-container-light"
+          : "collection-container"
+      }
+    >
       <div className='collection-top-bar'>
         {isCreating === true ? (
           <div className='create-note-container'>
             <div className='note-title-container'>
               <Input
-                className={classes.topInput}
+                className={
+                  toggleDark === true ? classesLight.topInput : classes.topInput
+                }
                 onChange={(e) => setTitle(e.target.value)}
                 placeholder='Title'
                 disableUnderline={true}
@@ -106,20 +114,28 @@ const Collection = (props) => {
                 onChange={(e) => setContent(e.target.value)}
                 disableUnderline={true}
                 multiline
-                className={classes.bottomInput}
+                className={
+                  toggleDark === true
+                    ? classesLight.bottomInput
+                    : classes.bottomInput
+                }
                 placeholder='Content'
                 fullWidth={true}
-                maxLength="5000"
+                maxLength='5000'
               />
             </div>
             <div className='add-button-container'>
               <RemoveCircleIcon
                 onClick={() => reset()}
-                className={classes.buttons}
+                className={
+                  toggleDark === true ? classesLight.buttons : classes.buttons
+                }
               />
               <AddCircleIcon
                 onClick={() => createCollectionNote()}
-                className={classes.buttons}
+                className={
+                  toggleDark === true ? classesLight.buttons : classes.buttons
+                }
               />
             </div>
           </div>
@@ -130,7 +146,9 @@ const Collection = (props) => {
               onClick={() => setIsCreating(true)}
             >
               <Input
-                className={classes.topInput}
+                className={
+                  toggleDark === true ? classesLight.topInput : classes.topInput
+                }
                 placeholder='Title'
                 disableUnderline={true}
                 fullWidth={true}
@@ -145,7 +163,11 @@ const Collection = (props) => {
         </div>
       ) : notesMap.length === 0 ? (
         <div className='empty-collection-container'>
-          <SpeakerNotesIcon className={classes.draftIcon} />
+          <SpeakerNotesIcon
+            className={
+              toggleDark === true ? classesLight.draftIcon : classes.draftIcon
+            }
+          />
           <h3>No notes in this collection</h3>
         </div>
       ) : (
@@ -188,6 +210,32 @@ const useStyles = makeStyles((theme) => ({
   },
   draftIcon: {
     color: "#2c2f33",
+    height: 100,
+    width: 200,
+  },
+}));
+
+const useStylesLight = makeStyles((theme) => ({
+  root: {
+    "& > *": {
+      margin: theme.spacing(1),
+    },
+  },
+  topInput: {
+    margin: "auto",
+    color: "#2c2f33",
+    height: 40,
+    fontSize: 20,
+  },
+  bottomInput: {
+    margin: "auto",
+    color: "#2c2f33",
+  },
+  buttons: {
+    color: "#2c2f33",
+  },
+  draftIcon: {
+    color: "#2c2f3393",
     height: 100,
     width: 200,
   },

@@ -1,4 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,600;0,700;0,800;1,300;1,400;1,600;1,700;1,800&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Comfortaa:wght@300;400;500;600;700&display=swap");
 .top-nav-container {
   width: 100%;
   height: 50px;
@@ -17,6 +18,25 @@
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
+}
+
+.top-nav-container .logo-container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  width: 5%;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+}
+
+.top-nav-container .logo-container h1 {
+  color: #ffffff;
+  font-family: "Comfortaa", cursive;
+  font-size: large;
+  margin-left: 10px;
 }
 
 .top-nav-container .search-bar-container {
@@ -53,5 +73,75 @@
 .top-nav-container .icon-link-background:hover {
   background-color: #2c2f33;
   border-radius: 50%;
+}
+
+.top-nav-container-light {
+  width: 100%;
+  height: 50px;
+  min-height: 50px;
+  border-bottom: 1px solid #99aab5;
+  position: fixed;
+  z-index: 3;
+  background-color: #f7f7f7;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+  -webkit-box-shadow: 0 4px 5px -1px rgba(0, 0, 0, 0.151);
+          box-shadow: 0 4px 5px -1px rgba(0, 0, 0, 0.151);
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.top-nav-container-light .logo-container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  width: 5%;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+}
+
+.top-nav-container-light .logo-container h1 {
+  color: #2c2f33;
+  font-family: "Comfortaa", cursive;
+  font-size: large;
+  margin-left: 10px;
+}
+
+.top-nav-container-light .search-bar-container {
+  width: 40vw;
+}
+
+.top-nav-container-light .icons-container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  width: 20vw;
+  height: 45px;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.top-nav-container-light .icon-link-background {
+  height: 40px;
+  width: 40px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
 }
 /*# sourceMappingURL=TopNav.css.map */

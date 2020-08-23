@@ -8,15 +8,21 @@ import ViewCompactIcon from "@material-ui/icons/ViewCompact";
 import GitHubIcon from "@material-ui/icons/GitHub";
 import LinkedInIcon from "@material-ui/icons/LinkedIn";
 import LanguageIcon from "@material-ui/icons/Language";
+import InputAdornment from "@material-ui/core/InputAdornment";
+import Brightness2Icon from "@material-ui/icons/Brightness2";
+import SearchIcon from "@material-ui/icons/Search";
+import BrightnessHighIcon from "@material-ui/icons/BrightnessHigh";
 import Switch from "@material-ui/core/Switch";
-import { toggledView, toggledTheme } from "../../redux/reducer";
+import NoteOutlinedIcon from "@material-ui/icons/NoteOutlined";
+import { toggledView, toggledDarkTheme } from "../../redux/reducer";
 import { connect } from "react-redux";
 
 const TopNav = (props) => {
-  const classes = useStyles();
-  const { toggleView } = props;
-  const { toggleTheme } = props;
+  const { toggleView, toggleDark } = props;
+  const { toggledDarkTheme } = props;
   const [searchInput, setSearchInput] = useState("");
+  const classes = useStyles();
+  const classesLight = useStylesLight();
 
   const history = useHistory();
   const location = useLocation();
@@ -33,31 +39,57 @@ const TopNav = (props) => {
   };
 
   return (
-    <div className='top-nav-container'>
-      <div></div>
+    <div
+      className={
+        toggleDark === true ? "top-nav-container-light" : "top-nav-container"
+      }
+    >
+      <div className='logo-container'>
+        <NoteOutlinedIcon className={classes.note} />
+        <h1>jotthoughts</h1>
+      </div>
       <div className='search-bar-container'>
         <Input
           placeholder='Search'
           disableUnderline={true}
-          className={classes.input}
+          className={toggleDark === true ? classesLight.input : classes.input}
           onChange={(e) => setSearchInput(e.target.value)}
           onKeyPress={handleSearch}
+          startAdornment={
+            <InputAdornment>
+              <SearchIcon className={classes.search} />
+            </InputAdornment>
+          }
         />
       </div>
       <div className='icons-container'>
-        <Switch color='primary' className={classes.switch} />
+        {toggleDark === true ? (
+          <Brightness2Icon
+            className={classesLight.listIcon}
+            onClick={() => toggledDarkTheme(false)}
+          />
+        ) : (
+          <BrightnessHighIcon
+            onClick={() => toggledDarkTheme(true)}
+            className={classes.listIcon}
+          />
+        )}
         {toggleView === false || toggleView === undefined ? (
           <div className='icon-link-background'>
             <DnsIcon
               onClick={() => props.toggledView(true)}
-              className={classes.listIcon}
+              className={
+                toggleDark === true ? classesLight.listIcon : classes.listIcon
+              }
             />
           </div>
         ) : (
           <div className='icon-link-background'>
             <ViewCompactIcon
               onClick={() => props.toggledView(false)}
-              className={classes.listIcon}
+              className={
+                toggleDark === true ? classesLight.listIcon : classes.listIcon
+              }
             />
           </div>
         )}
@@ -67,7 +99,11 @@ const TopNav = (props) => {
           target='_blank'
           href='https://github.com/chasedurrett'
         >
-          <GitHubIcon className={classes.listIcon} />
+          <GitHubIcon
+            className={
+              toggleDark === true ? classesLight.listIcon : classes.listIcon
+            }
+          />
         </a>
         <a
           className='icon-link-background'
@@ -77,7 +113,9 @@ const TopNav = (props) => {
         >
           <LinkedInIcon
             style={{ height: 28, width: 28 }}
-            className={classes.listIcon}
+            className={
+              toggleDark === true ? classesLight.listIcon : classes.listIcon
+            }
           />
         </a>
         <a
@@ -86,7 +124,11 @@ const TopNav = (props) => {
           rel='noopener noreferrer'
           href='http://www.chasedurrett.com'
         >
-          <LanguageIcon className={classes.listIcon} />
+          <LanguageIcon
+            className={
+              toggleDark === true ? classesLight.listIcon : classes.listIcon
+            }
+          />
         </a>
       </div>
     </div>
@@ -95,7 +137,9 @@ const TopNav = (props) => {
 
 const mapStateToProps = (reduxState) => reduxState;
 
-export default connect(mapStateToProps, { toggledView, toggledTheme })(TopNav);
+export default connect(mapStateToProps, { toggledView, toggledDarkTheme })(
+  TopNav
+);
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -108,9 +152,9 @@ const useStyles = makeStyles((theme) => ({
     padding: "0 10px",
     color: "#ffffff",
     height: 40,
-    fontSize: 17,
+    fontSize: 19,
     width: "90%",
-    backgroundColor: "rgba(255, 255, 255, 0.274)",
+    backgroundColor: "#2c2f33",
     borderRadius: 8,
   },
   listIcon: {
@@ -119,10 +163,52 @@ const useStyles = makeStyles((theme) => ({
     transition: "all ease 300ms",
     "&:hover": {
       cursor: "pointer",
-      color: "#ffffff",
+      color: "#7289da",
     },
   },
   switch: {
     color: "#ffffff",
+  },
+  search: {
+    paddingRight: 10,
+  },
+  note: {
+    color: "#7289da",
+  },
+}));
+
+const useStylesLight = makeStyles((theme) => ({
+  root: {
+    "& > *": {
+      margin: theme.spacing(1),
+    },
+  },
+  input: {
+    margin: "auto",
+    padding: "0 10px",
+    color: "#2c2f33",
+    height: 40,
+    fontSize: 19,
+    width: "90%",
+    backgroundColor: "#f7f7f7",
+    borderRadius: 8,
+  },
+  listIcon: {
+    color: "#2c2f33",
+    margin: "auto",
+    transition: "all ease 300ms",
+    "&:hover": {
+      cursor: "pointer",
+      color: "#7289da",
+    },
+  },
+  switch: {
+    color: "#ffffff",
+  },
+  search: {
+    paddingRight: 10,
+  },
+  note: {
+    color: "#7289da",
   },
 }));

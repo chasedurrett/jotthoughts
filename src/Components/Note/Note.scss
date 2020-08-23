@@ -35,3 +35,39 @@
     margin: auto;
   }
 }
+
+.note-container-light {
+  position: relative;
+  grid-column: auto;
+  align-self: stretch;
+  min-height: 150px;
+  grid-row: auto;
+  border: 1px solid $gray;
+  border-radius: 10px;
+  background-color: $smoke;
+  color: $black;
+  transition: all ease 400ms;
+  .delete-icon {
+    display: none;
+    transition: all ease 400ms;
+  }
+  &:hover {
+    box-shadow: 0 0 3px 4px rgba(27, 27, 27, 0.116);
+    border: 1px solid $blue;
+    cursor: pointer;
+    .delete-icon {
+      transition: all ease 400ms;
+      display: initial;
+    }
+  }
+  &:focus {
+    box-shadow: 0 0 3px 4px rgba(27, 27, 27, 0.116);
+    border: 1px solid $green;
+    cursor: pointer;
+  }
+  .note-title-container,
+  .note-content-container {
+    width: 90%;
+    margin: auto;
+  }
+}

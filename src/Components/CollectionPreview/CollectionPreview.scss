@@ -1,10 +1,31 @@
 @import "../../sass/variables";
 
 .collection-preview-container {
-    width: 100%;
+  width: 100%;
   .collection-name-link {
     text-decoration: none;
     width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    .delete-container,
+    .delete-container-active {
+      width: 55px;
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+    }
+    .main-links {
+      display: flex;
+      width: 60%;
+    }
+    .secondary-links {
+      width: 40%;
+      display: flex;
+      min-width: 90px;
+      justify-content: space-around;
+      align-items: center;
+    }
     .collection-name-container {
       width: 30%;
       display: flex;
