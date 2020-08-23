@@ -200,10 +200,12 @@ const useStyles = makeStyles((theme) => ({
     color: "#ffffff",
     height: 40,
     fontSize: 20,
+    transition: "all ease 300ms",
   },
   bottomInput: {
     margin: "auto",
     color: "#ffffff",
+    transition: "all ease 300ms",
   },
   buttons: {
     color: "#ffffff",
@@ -226,10 +228,12 @@ const useStylesLight = makeStyles((theme) => ({
     color: "#2c2f33",
     height: 40,
     fontSize: 20,
+    transition: "all ease 300ms",
   },
   bottomInput: {
     margin: "auto",
     color: "#2c2f33",
+    transition: "all ease 300ms",
   },
   buttons: {
     color: "#2c2f33",

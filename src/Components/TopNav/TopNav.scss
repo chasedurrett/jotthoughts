@@ -1,5 +1,17 @@
 @import "../../sass/variables";
 
+@mixin break1 {
+  @media (max-width: 550px) {
+    @content;
+  }
+}
+
+@mixin break2 {
+  @media (max-width: 650px) {
+    @content;
+  }
+}
+
 .top-nav-container {
   width: 100%;
   height: 50px;
@@ -14,7 +26,7 @@
   align-items: center;
   .logo-container {
     display: flex;
-    width: 5%;
+    width: 150px;
     align-items: center;
     justify-content: space-around;
     h1 {
@@ -26,6 +38,9 @@
   }
   .search-bar-container {
     width: 40vw;
+    @include break1(){
+      display: none;
+    }
   }
   .icons-container {
     display: flex;
@@ -33,6 +48,14 @@
     height: 45px;
     justify-content: space-around;
     align-items: center;
+    .social-links-container{
+      width: 50%;
+      display: flex;
+      align-items: center;
+      @include break2(){
+        display: none;
+      }
+    }
   }
   .icon-link-background {
     height: 40px;
@@ -61,7 +84,7 @@
   align-items: center;
   .logo-container {
     display: flex;
-    width: 5%;
+    width: 150px;
     align-items: center;
     justify-content: space-around;
     h1 {
@@ -73,6 +96,9 @@
   }
   .search-bar-container {
     width: 40vw;
+    @include break1(){
+      display: none;
+    }
   }
   .icons-container {
     display: flex;
@@ -80,6 +106,14 @@
     height: 45px;
     justify-content: space-around;
     align-items: center;
+    .social-links-container{
+      width: 50%;
+      display: flex;
+      align-items: center;
+      @include break2(){
+        display: none;
+      }
+    }
   }
   .icon-link-background {
     height: 40px;

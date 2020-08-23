@@ -83,6 +83,12 @@
   border-bottom: solid 1px #ffffff;
 }
 
+@media (max-width: 1200px) {
+  .nav-container .nav-seperator div {
+    display: none;
+  }
+}
+
 .nav-container .nav-seperator p {
   font-family: "Open Sans", sans-serif;
   font-size: small;
@@ -186,6 +192,12 @@
   width: 60%;
   margin-left: 8px;
   border-bottom: solid 1px #2c2f33;
+}
+
+@media (max-width: 1200px) {
+  .nav-container-light .nav-seperator div {
+    display: none;
+  }
 }
 
 .nav-container-light .nav-seperator p {

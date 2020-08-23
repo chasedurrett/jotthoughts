@@ -10,6 +10,7 @@ import RemoveIcon from "@material-ui/icons/Remove";
 import AddIcon from "@material-ui/icons/Add";
 import data from "../Data/MOCK_DATA(1).json";
 import { connect } from "react-redux";
+import { gsap } from "gsap";
 import CollectionPreview from "../CollectionPreview/CollectionPreview";
 // require("dotenv").config();
 

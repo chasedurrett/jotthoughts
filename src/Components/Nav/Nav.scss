@@ -1,11 +1,13 @@
 @import "../../sass/variables";
 
-// .nav-container::-webkit-scrollbar {
-//   display: none;
-//   &:hover {
-//     display: inherit;
-//   }
-// }
+@mixin break1 {
+  @media (max-width: 1200px) {
+    @content;
+  }
+}
+
+
+
 .nav-container {
   height: calc(100vh - 50px);
   margin-top: 50px;
@@ -63,6 +65,9 @@
       width: 60%;
       margin-left: 8px;
       border-bottom: solid 1px $white;
+      @include break1(){
+        display: none;
+      }
     }
     p {
       font-family: $openSans;
@@ -141,6 +146,9 @@
       width: 60%;
       margin-left: 8px;
       border-bottom: solid 1px $black;
+      @include break1(){
+        display: none;
+      }
     }
     p {
       font-family: $openSans;
