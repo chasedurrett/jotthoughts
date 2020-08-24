@@ -13,15 +13,13 @@ import InputAdornment from "@material-ui/core/InputAdornment";
 import Brightness2Icon from "@material-ui/icons/Brightness2";
 import SearchIcon from "@material-ui/icons/Search";
 import BrightnessHighIcon from "@material-ui/icons/BrightnessHigh";
-import Switch from "@material-ui/core/Switch";
 import NoteOutlinedIcon from "@material-ui/icons/NoteOutlined";
-import { toggledView, toggledDarkTheme } from "../../redux/reducer";
-import useMediaQuery from "@material-ui/core/useMediaQuery";
+import { toggledView, toggledDarkTheme, toggledMenu } from "../../redux/reducer";
 import { connect } from "react-redux";
 
 const TopNav = (props) => {
-  const { toggleView, toggleDark } = props;
-  const { toggledDarkTheme } = props;
+  const { toggleView, toggleDark, toggleMenu } = props;
+  const { toggledDarkTheme, toggledMenu } = props;
   const [searchInput, setSearchInput] = useState("");
   const classes = useStyles();
   const classesLight = useStylesLight();
@@ -47,6 +45,7 @@ const TopNav = (props) => {
       }
     >
       <MenuIcon
+        onClick={() => toggledMenu(true)}
         className={toggleDark === true ? classesLight.menu : classes.menu}
       />
       <div className='logo-container'>
@@ -143,10 +142,13 @@ const TopNav = (props) => {
 };
 
 const mapStateToProps = (reduxState) => reduxState;
+const mapDispatchToProps = {
+  toggledMenu,
+  toggledView,
+  toggledDarkTheme,
+};
 
-export default connect(mapStateToProps, { toggledView, toggledDarkTheme })(
-  TopNav
-);
+export default connect(mapStateToProps, mapDispatchToProps)(TopNav);
 
 const useStyles = makeStyles((theme) => ({
   root: {

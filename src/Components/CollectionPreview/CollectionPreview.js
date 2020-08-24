@@ -17,7 +17,7 @@ const CollectionPreview = (props) => {
   const supabase = createClient(SUPABASE_URL, REACT_APP_SUPABASE_KEY);
   const classes = useStyles();
   const classesLight = useStylesLight();
-  const { toggleDark } = props;
+  const { toggleDark, toggleMenu } = props;
   const { id, collection_name } = props.collection;
   const { active, onClick, getCollections } = props;
   const [open, setOpen] = useState(false);
@@ -63,109 +63,157 @@ const CollectionPreview = (props) => {
   };
 
   return (
-    <div onClick={onClick} className='collection-preview-container'>
-      <Link className='collection-name-link' to={`/collections/${id}`}>
-        <Button
-          variant='outlined'
-          className={
-            toggleDark === true
-              ? active
-                ? classesLight.buttonActive
-                : classesLight.button
-              : active
-              ? classes.buttonActive
-              : classes.button
-          }
-        >
-          <div className='secondary-links'>
-            <span
+    <div>
+      {toggleMenu === true ? (
+        <div onClick={onClick} className='collection-preview-container'>
+          <Link className='collection-name-link' to={`/collections/${id}`}>
+            <Button
+              variant='outlined'
               className={
-                active ? "delete-container-active" : "delete-container"
+                toggleDark === true
+                  ? active
+                    ? classesLight.buttonActive
+                    : classesLight.button
+                  : active
+                  ? classes.buttonActive
+                  : classes.button
               }
             >
-              <DeleteOutlineIcon
-                onClick={() => handleOpen()}
-                className={
-                  toggleDark === true
-                    ? active
-                      ? classesLight.deleteActive
-                      : classesLight.delete
-                    : active
-                    ? classes.deleteActive
-                    : classes.delete
-                }
-              />{" "}
-            </span>
-            <span
+              {/* <div className='secondary-links'>
+                <span
+                  className={
+                    active ? "delete-container-active" : "delete-container"
+                  }
+                >
+                  {" "}
+                </span>
+                <span
+                  className={
+                    active ? "delete-container-active" : "delete-container"
+                  }
+                >
+                  {" "}
+                </span>
+              </div>
+              <div className='main-links'>
+                <span
+                  style={{
+                    width: 85,
+                    display: "flex",
+                    justifyContent: "flex-start",
+                    alignItems: "center",
+                  }}
+                ></span>
+              </div> */}
+              <span
+                style={{
+                 
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
+                }}
+              >
+                <FiberManualRecordIcon
+                style={{marginRight: 5}}
+                  className={active ? classes.navActive : classes.nav}
+                />
+              </span>
+            </Button>
+          </Link>
+        </div>
+      ) : (
+        <div onClick={onClick} className='collection-preview-container'>
+          <Link className='collection-name-link' to={`/collections/${id}`}>
+            <Button
+              variant='outlined'
               className={
-                active ? "delete-container-active" : "delete-container"
+                toggleDark === true
+                  ? active
+                    ? classesLight.buttonActive
+                    : classesLight.button
+                  : active
+                  ? classes.buttonActive
+                  : classes.button
               }
             >
-              <EditIcon
-                onClick={() => handleEditOpen()}
-                className={
-                  toggleDark === true
-                    ? active
-                      ? classesLight.deleteActive
-                      : classesLight.delete
-                    : active
-                    ? classes.deleteActive
-                    : classes.delete
-                }
-              />{" "}
-            </span>
-            <span
-              style={{
-                width: 55,
-                display: "flex",
-                justifyContent: "flex-start",
-                alignItems: "center",
-              }}
-            >
-              {" "}
-              <FiberManualRecordIcon
-                className={active ? classes.navActive : classes.nav}
-              />
-            </span>
-          </div>
-          <div className='main-links'>
-            {/* <span
-              style={{
-                width: 85,
-                display: "flex",
-                justifyContent: "flex-start",
-                alignItems: "center",
-              }}
-            >
-              {" "}
-              <FiberManualRecordIcon
-                className={active ? classes.navActive : classes.nav}
-              />
-            </span>{" "} */}
-            <span
-              style={{
-                width: 85,
-                display: "flex",
-                justifyContent: "flex-start",
-                alignItems: "center",
-              }}
-            >
-              {collection_name}
-            </span>
-          </div>
-        </Button>
-      </Link>
-      <DeleteModal
-        deleteCollection={deleteCollection}
-        open={open}
-        handleClose={handleClose}
-      ></DeleteModal>
-      <EditModal
-        open={edit}
-        collectionName={collection_name}
-        handleEditClose={handleEditClose}
-        editCollection={editCollection}
-      ></EditModal>
+              <div className='secondary-links'>
+                <span
+                  className={
+                    active ? "delete-container-active" : "delete-container"
+                  }
+                >
+                  <DeleteOutlineIcon
+                    onClick={() => handleOpen()}
+                    className={
+                      toggleDark === true
+                        ? active
+                          ? classesLight.deleteActive
+                          : classesLight.delete
+                        : active
+                        ? classes.deleteActive
+                        : classes.delete
+                    }
+                  />{" "}
+                </span>
+                <span
+                  className={
+                    active ? "delete-container-active" : "delete-container"
+                  }
+                >
+                  <EditIcon
+                    onClick={() => handleEditOpen()}
+                    className={
+                      toggleDark === true
+                        ? active
+                          ? classesLight.deleteActive
+                          : classesLight.delete
+                        : active
+                        ? classes.deleteActive
+                        : classes.delete
+                    }
+                  />{" "}
+                </span>
+              </div>
+              <div className='main-links'>
+                <span
+                  style={{
+                    width: 85,
+                    display: "flex",
+                    justifyContent: "flex-start",
+                    alignItems: "center",
+                  }}
+                >
+                  {collection_name}
+                </span>
+              </div>
+              <span
+                style={{
+                  width: 55,
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
+                }}
+              >
+                {" "}
+                <FiberManualRecordIcon
+                  className={active ? classes.navActive : classes.nav}
+                />
+              </span>
+            </Button>
+          </Link>
+          <DeleteModal
+            deleteCollection={deleteCollection}
+            open={open}
+            handleClose={handleClose}
+          ></DeleteModal>
+          <EditModal
+            open={edit}
+            collectionName={collection_name}
+            handleEditClose={handleEditClose}
+            editCollection={editCollection}
+          ></EditModal>
+        </div>
+      )}
     </div>
   );
 };
@@ -207,6 +255,7 @@ const useStyles = makeStyles((theme) => ({
     color: "#ffffff",
     border: "none",
     borderRadius: 0,
+    backgroundColor: '#ffffff2f',
     margin: "0",
     borderTopRightRadius: 15,
     borderBottomRightRadius: 15,

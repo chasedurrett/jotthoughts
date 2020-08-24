@@ -1,10 +1,12 @@
 const initialState = {
   toggleView: false,
   toggleDark: true,
+  toggleMenu: false,
 };
 
 const TOGGLED_VIEW = "TOGGLED_VIEW";
 const TOGGLED_DARK_THEME = "TOGGLED_DARK_THEME";
+const TOGGLED_MENU = "TOGGLED_MENU";
 
 export function toggledView(bool) {
   return {
@@ -20,6 +22,12 @@ export function toggledDarkTheme(bool) {
   };
 }
 
+export function toggledMenu() {
+  return {
+    type: TOGGLED_MENU,
+  };
+}
+
 export default function reducer(state = initialState, action) {
   switch (action.type) {
     case TOGGLED_VIEW:
@@ -31,6 +39,11 @@ export default function reducer(state = initialState, action) {
       return {
         ...state,
         toggleDark: action.payload,
+      };
+    case TOGGLED_MENU:
+      return {
+        ...state,
+        toggleMenu: !state.toggleMenu,
       };
     default:
       return state;

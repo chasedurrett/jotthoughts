@@ -36,15 +36,15 @@
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  width: 60%;
+  width: 55px;
 }
 
 .collection-preview-container .collection-name-link .secondary-links {
-  width: 40%;
+  width: 30%;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  min-width: 90px;
+  min-width: 50px;
   -ms-flex-pack: distribute;
       justify-content: space-around;
   -webkit-box-align: center;

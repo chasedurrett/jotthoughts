@@ -1,7 +1,6 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import "./Nav.css";
 import { createClient } from "@supabase/supabase-js";
-import { Link } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
 import Input from "@material-ui/core/Input";
@@ -10,9 +9,8 @@ import RemoveIcon from "@material-ui/icons/Remove";
 import AddIcon from "@material-ui/icons/Add";
 import data from "../Data/MOCK_DATA(1).json";
 import { connect } from "react-redux";
-import { gsap } from "gsap";
+import { gsap, TweenMax, Power3 } from "gsap";
 import CollectionPreview from "../CollectionPreview/CollectionPreview";
-// require("dotenv").config();
 
 const Nav = (props) => {
   const SUPABASE_URL = "https://kfvonrpponseevqsueft.supabase.co";
@@ -20,16 +18,30 @@ const Nav = (props) => {
   const supabase = createClient(SUPABASE_URL, REACT_APP_SUPABASE_KEY);
   const classes = useStyles();
   const classesLight = useStylesLight();
-
+  let menuSlide = useRef(null);
   const [collections, setCollections] = useState([]);
   const [isAdding, setIsAdding] = useState(false);
   const [name, setName] = useState("");
   const [chosen, setChosen] = useState("");
-  const { toggleDark } = props;
+  const { toggleDark, toggleMenu } = props;
 
   useEffect(() => {
     getCollections();
   }, []);
+
+  // useEffect(() => {
+  //   gsap.from([menuSlide], 1, {
+  //     ease: Power3,
+  //     x: 180,
+  //   });
+  // }, [toggleMenu]);
+
+  // const slideMenu = () => {
+  //   TweenMax.to([menu], 1, {
+  //     delay: 2,
+  //     x: -180,
+  //   });
+  // };
 
   const getCollections = async () => {
     try {
@@ -71,77 +83,169 @@ const Nav = (props) => {
   });
 
   return (
-    <div
-      className={toggleDark === true ? "nav-container-light" : "nav-container"}
-    >
-      <div className='nav-input-container'>
-        {isAdding === false ? (
-          <Button
-            onClick={() => setIsAdding(true)}
-            className={
-              toggleDark === true ? classesLight.topButton : classes.topButton
-            }
-            variant='outlined'
-          >
-            Collection{" "}
-            <span
-              style={{ display: "flex", alignItems: "center", paddingLeft: 8 }}
-            >
-              <AddIcon />
-            </span>
-          </Button>
-        ) : (
-          <div
-            className='toggled-nav-input-container'
-            style={{
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "center",
-            }}
-          >
-            <Button
-              onClick={() => setIsAdding(false)}
-              className={
-                toggleDark === true ? classesLight.topButton : classes.topButton
-              }
-              variant='outlined'
-            >
-              Collection{" "}
-              <span
+    <div>
+      {toggleMenu === true ? (
+        <div
+          // ref={(el) => (menuSlide = el)}
+          className={
+            toggleDark === true
+              ? "nav-container-light-toggle"
+              : "nav-container-toggle"
+          }
+        >
+          <div className='nav-input-container'>
+            {isAdding === false ? (
+              <Button
+                onClick={() => setIsAdding(true)}
+                disabled={true}
+                className={
+                  toggleDark === true
+                    ? classesLight.topButton
+                    : classes.topButton
+                }
+              >
+                <span
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                  }}
+                ></span>
+              </Button>
+            ) : (
+              <div
+                className='toggled-nav-input-container'
                 style={{
                   display: "flex",
+                  flexDirection: "column",
                   alignItems: "center",
-                  paddingLeft: 8,
                 }}
               >
-                <RemoveIcon />
-              </span>
-            </Button>
-            <Input
-              onChange={(e) => setName(e.target.value)}
-              className={
-                toggleDark === true ? classesLight.input : classes.input
-              }
-              id='standard-basic'
-              label='Collection Name'
-              placeholder='Name'
-              disableUnderline={true}
-            />
-            <div className='add-collection-form-p'>
-              <p onClick={() => createCollection()}>Add</p>
-            </div>
+                <Button
+                  onClick={() => setIsAdding(false)}
+                  className={
+                    toggleDark === true
+                      ? classesLight.topButton
+                      : classes.topButton
+                  }
+                  variant='outlined'
+                >
+                  {" "}
+                  <span
+                    style={{
+                      display: "flex",
+                      alignItems: "center",
+                      paddingLeft: 8,
+                    }}
+                  >
+                    <RemoveIcon />
+                  </span>
+                </Button>
+                <Input
+                  onChange={(e) => setName(e.target.value)}
+                  className={
+                    toggleDark === true ? classesLight.input : classes.input
+                  }
+                  id='standard-basic'
+                  label='Collection Name'
+                  placeholder='Name'
+                  disableUnderline={true}
+                />
+                <div className='add-collection-form-p'>
+                  <p onClick={() => createCollection()}>Add</p>
+                </div>
+              </div>
+            )}
           </div>
-        )}
-      </div>
-      <div className='nav-seperator'>
-        {collections.length === 1 ? (
-          <p>{collections.length} collection</p>
-        ) : (
-          <p>{collections.length} collections</p>
-        )}
-        <div></div>
-      </div>
-      <div className='nav-collections-container'>{collectionsMap}</div>
+          {/* <div className='nav-seperator'>
+            <div></div>
+          </div> */}
+          <div className='nav-collections-container'>{collectionsMap}</div>
+        </div>
+      ) : (
+        <div
+          ref={(el) => (menuSlide = el)}
+          className={
+            toggleDark === true ? "nav-container-light" : "nav-container"
+          }
+        >
+          <div className='nav-input-container'>
+            {isAdding === false ? (
+              <Button
+                onClick={() => setIsAdding(true)}
+                className={
+                  toggleDark === true
+                    ? classesLight.topButton
+                    : classes.topButton
+                }
+                variant='outlined'
+              >
+                Collection{" "}
+                <span
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    paddingLeft: 8,
+                  }}
+                >
+                  <AddIcon />
+                </span>
+              </Button>
+            ) : (
+              <div
+                className='toggled-nav-input-container'
+                style={{
+                  display: "flex",
+                  flexDirection: "column",
+                  alignItems: "center",
+                }}
+              >
+                <Button
+                  onClick={() => setIsAdding(false)}
+                  className={
+                    toggleDark === true
+                      ? classesLight.topButton
+                      : classes.topButton
+                  }
+                  variant='outlined'
+                >
+                  Collection{" "}
+                  <span
+                    style={{
+                      display: "flex",
+                      alignItems: "center",
+                      paddingLeft: 8,
+                    }}
+                  >
+                    <RemoveIcon />
+                  </span>
+                </Button>
+                <Input
+                  onChange={(e) => setName(e.target.value)}
+                  className={
+                    toggleDark === true ? classesLight.input : classes.input
+                  }
+                  id='standard-basic'
+                  label='Collection Name'
+                  placeholder='Name'
+                  disableUnderline={true}
+                />
+                <div className='add-collection-form-p'>
+                  <p onClick={() => createCollection()}>Add</p>
+                </div>
+              </div>
+            )}
+          </div>
+          {/* <div className='nav-seperator'>
+            {collections.length === 1 ? (
+              <p>{collections.length} collection</p>
+            ) : (
+              <p>{collections.length} collections</p>
+            )}
+            <div></div>
+          </div> */}
+          <div className='nav-collections-container'>{collectionsMap}</div>
+        </div>
+      )}
     </div>
   );
 };
