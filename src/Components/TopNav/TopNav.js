@@ -14,7 +14,11 @@ import Brightness2Icon from "@material-ui/icons/Brightness2";
 import SearchIcon from "@material-ui/icons/Search";
 import BrightnessHighIcon from "@material-ui/icons/BrightnessHigh";
 import NoteOutlinedIcon from "@material-ui/icons/NoteOutlined";
-import { toggledView, toggledDarkTheme, toggledMenu } from "../../redux/reducer";
+import {
+  toggledView,
+  toggledDarkTheme,
+  toggledMenu,
+} from "../../redux/reducer";
 import { connect } from "react-redux";
 
 const TopNav = (props) => {
@@ -169,6 +173,7 @@ const useStyles = makeStyles((theme) => ({
   menu: {
     transition: "all ease 300ms",
     color: "#ffffff",
+    padding: "0 10px",
     "&:hover": {
       color: "#7289da",
       cursor: "pointer",
@@ -221,6 +226,7 @@ const useStylesLight = makeStyles((theme) => ({
   },
   menu: {
     transition: "all ease 300ms",
+    padding: "0 10px",
     "&:hover": {
       color: "#7289da",
       cursor: "pointer",

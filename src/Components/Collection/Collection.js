@@ -163,11 +163,11 @@ const Collection = (props) => {
         </div>
       ) : notesMap.length === 0 ? (
         <div className='empty-collection-container'>
-          <SpeakerNotesIcon
+          {/* <SpeakerNotesIcon
             className={
               toggleDark === true ? classesLight.draftIcon : classes.draftIcon
             }
-          />
+          /> */}
           <h3>No notes in this collection</h3>
         </div>
       ) : (

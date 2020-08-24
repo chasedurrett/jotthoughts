@@ -130,10 +130,6 @@
   /* Firefox */
 }
 
-.nav-container-light:hover {
-  background-color: #ffffff2f;
-}
-
 .nav-container-light::-webkit-scrollbar {
   display: none;
 }
