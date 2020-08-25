@@ -6,9 +6,11 @@ import { makeStyles } from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
 import EditIcon from "@material-ui/icons/Edit";
 import { createClient } from "@supabase/supabase-js";
+import { withRouter } from "react-router-dom";
 import DeleteModal from "../DeleteModal/DeleteModal";
 import EditModal from "../EditModal/EditModal";
 import { connect } from "react-redux";
+import axios from "axios";
 import "./CollectionPreview.css";
 
 const CollectionPreview = (props) => {
@@ -39,27 +41,23 @@ const CollectionPreview = (props) => {
     toggleEdit(false);
   };
 
-  const deleteCollection = async () => {
-    try {
-      await supabase.from("notes").eq("collection_id", `${id}`).delete();
-      await supabase.from("collections").eq("id", `${id}`).delete();
-      getCollections();
-    } catch (err) {
-      console.log(err);
-    }
+  const deleteCollection = () => {
+    axios
+      .delete(`/api/collections/${id}`)
+      .then((res) => {
+        getCollections();
+      })
+      .catch((err) => console.log(err));
   };
 
-  const editCollection = async (editName) => {
-    try {
-      await supabase
-        .from("collections")
-        .eq("id", `${id}`)
-        .update({ collection_name: editName });
-      getCollections();
-      handleEditClose();
-    } catch (err) {
-      console.log(err);
-    }
+  const editCollection = (editName) => {
+    axios
+      .put(`/api/collections`, { id, editName })
+      .then((res) => {
+        getCollections();
+        handleEditClose();
+      })
+      .catch((err) => console.log(err));
   };
 
   return (
@@ -79,42 +77,15 @@ const CollectionPreview = (props) => {
                   : classes.button
               }
             >
-              {/* <div className='secondary-links'>
-                <span
-                  className={
-                    active ? "delete-container-active" : "delete-container"
-                  }
-                >
-                  {" "}
-                </span>
-                <span
-                  className={
-                    active ? "delete-container-active" : "delete-container"
-                  }
-                >
-                  {" "}
-                </span>
-              </div>
-              <div className='main-links'>
-                <span
-                  style={{
-                    width: 85,
-                    display: "flex",
-                    justifyContent: "flex-start",
-                    alignItems: "center",
-                  }}
-                ></span>
-              </div> */}
               <span
                 style={{
-                 
                   display: "flex",
                   justifyContent: "center",
                   alignItems: "center",
                 }}
               >
                 <FiberManualRecordIcon
-                style={{marginRight: 5}}
+                  style={{ marginRight: 5 }}
                   className={active ? classes.navActive : classes.nav}
                 />
               </span>
@@ -220,7 +191,7 @@ const CollectionPreview = (props) => {
 
 const mapStateToProps = (reduxState) => reduxState;
 
-export default connect(mapStateToProps, null)(CollectionPreview);
+export default withRouter(connect(mapStateToProps, null)(CollectionPreview));
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -255,7 +226,7 @@ const useStyles = makeStyles((theme) => ({
     color: "#ffffff",
     border: "none",
     borderRadius: 0,
-    backgroundColor: '#ffffff2f',
+    backgroundColor: "#ffffff2f",
     margin: "0",
     borderTopRightRadius: 15,
     borderBottomRightRadius: 15,

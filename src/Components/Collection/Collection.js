@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import axios from "axios";
 import { createClient } from "@supabase/supabase-js";
 import "./Collection.css";
 import Input from "@material-ui/core/Input";
@@ -30,17 +31,13 @@ const Collection = (props) => {
 
   const getCollectionNotes = async () => {
     setLoading(true);
-    try {
-      let { body: notes } = await supabase
-        .from("notes")
-        .filter("collection_id", "eq", `${props.match.params.collectionid}`)
-        .order("id")
-        .select("*");
-      setCollectionNotes(notes);
-      setLoading(false);
-    } catch (err) {
-      console.log(err);
-    }
+    await axios
+      .get(`/api/collections/${props.match.params.collectionid}/notes`)
+      .then((res) => {
+        setCollectionNotes(res.data);
+        setLoading(false);
+      })
+      .catch((err) => console.log(err));
   };
 
   const reset = () => {
@@ -49,44 +46,48 @@ const Collection = (props) => {
     setContent("");
   };
 
-  const createCollectionNote = async () => {
-    try {
-      await supabase.from("notes").insert([
-        {
-          note_title: title,
-          note_content: content,
-          collection_id: props.match.params.collectionid,
-        },
-      ]);
-      let { body: notes } = await supabase
-        .from("notes")
-        .filter("collection_id", "eq", `${props.match.params.collectionid}`)
-        .select("*");
-      setCollectionNotes(notes);
-      setIsCreating(false);
-      setTitle("");
-      setContent("");
-    } catch (err) {
-      console.log(err);
-    }
+  const createCollectionNote = () => {
+    axios
+      .post(`/api/collections/${props.match.params.collectionid}/notes`, {
+        title,
+        content,
+      })
+      .then((res) => {
+        getCollectionNotes();
+        setIsCreating(false);
+        setTitle("");
+        setContent("");
+      })
+      .catch((err) => console.log(err));
   };
 
-  const deleteNote = async (noteId) => {
-    try {
-      await supabase.from("notes").eq("id", `${noteId}`).delete();
-      let { body: notes } = await supabase
-        .from("notes")
-        .filter("collection_id", "eq", `${props.match.params.collectionid}`)
-        .select("*");
-      setCollectionNotes(notes);
-    } catch (err) {
-      console.log(err);
-    }
+  // const deleteNote = async (noteId) => {
+  //   try {
+  //     await supabase.from("notes").eq("id", `${noteId}`).delete();
+  //     let { body: notes } = await supabase
+  //       .from("notes")
+  //       .filter("collection_id", "eq", `${props.match.params.collectionid}`)
+  //       .select("*");
+  //     setCollectionNotes(notes);
+  //   } catch (err) {
+  //     console.log(err);
+  //   }
+  // };
+
+  const deleteNote = (noteid) => {
+    axios
+      .delete(`/api/collections/notes/${noteid}`)
+      .then((res) => {
+        getCollectionNotes();
+      })
+      .catch((err) => console.log(err));
   };
 
-  const notesMap = collectionNotes.map((e) => {
-    return <Note deleteNote={deleteNote} key={e.id} note={e} />;
-  });
+  const notesMap = collectionNotes
+    .map((e) => {
+      return <Note deleteNote={deleteNote} key={e.id} note={e} />;
+    })
+    .reverse();
 
   return (
     <div

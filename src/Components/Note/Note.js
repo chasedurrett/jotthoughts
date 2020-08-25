@@ -4,6 +4,7 @@ import Input from "@material-ui/core/Input";
 import { makeStyles } from "@material-ui/core/styles";
 import HighlightOffIcon from "@material-ui/icons/HighlightOff";
 import { createClient } from "@supabase/supabase-js";
+import axios from "axios";
 import { connect } from "react-redux";
 
 const Note = (props) => {
@@ -27,26 +28,28 @@ const Note = (props) => {
     };
   });
 
-  const editNote = async () => {
-    try {
-      await supabase
-        .from("notes")
-        .eq("id", `${id}`)
-        .update({ note_title: title, note_content: content });
-    } catch (err) {
-      console.log(err);
-    }
-    document.removeEventListener("mousedown", handleClick);
+  const editNote = () => {
+    axios
+      .put(`/api/collections/notes`, {
+        id,
+        title,
+        content,
+      })
+      .then((res) => {
+        document.removeEventListener("mousedown", handleClick);
+      })
+      .catch((err) => console.log(err));
   };
 
   const handleClick = (e) => {
     if (within.current.contains(e.target)) {
       return;
     }
-
     editNote();
   };
 
+
+  
   return (
     <div
       className={

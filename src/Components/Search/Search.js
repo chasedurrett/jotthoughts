@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
 import CircularProgress from "@material-ui/core/CircularProgress";
-import HourglassEmptyIcon from "@material-ui/icons/HourglassEmpty";
+import axios from "axios";
 import { createClient } from "@supabase/supabase-js";
 import Note from "../Note/Note.js";
 import { connect } from "react-redux";
@@ -25,19 +25,15 @@ const Search = (props) => {
   }, [searchParam]);
 
   let searchParamAlt = searchParam.replace("?input=", "");
-
-  const getCollectionNotes = async () => {
+  const getCollectionNotes = () => {
     setLoading(true);
-    try {
-      let { body: notes } = await supabase
-        .from("notes")
-        .like("note_title", `%${searchParamAlt}%`)
-        .select("*");
-      setCollectionNotes(notes);
-      setLoading(false);
-    } catch (err) {
-      console.log(err);
-    }
+    axios
+      .get(`/api/collections/search/${searchParamAlt}`)
+      .then((res) => {
+        setCollectionNotes(res.data);
+        setLoading(false);
+      })
+      .catch((err) => console.log(err));
   };
 
   const deleteNote = async (noteId) => {

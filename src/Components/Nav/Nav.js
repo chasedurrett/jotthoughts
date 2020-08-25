@@ -4,12 +4,12 @@ import { createClient } from "@supabase/supabase-js";
 import { makeStyles } from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
 import Input from "@material-ui/core/Input";
+import axios from "axios";
 import FiberManualRecordIcon from "@material-ui/icons/FiberManualRecord";
 import RemoveIcon from "@material-ui/icons/Remove";
 import AddIcon from "@material-ui/icons/Add";
 import data from "../Data/MOCK_DATA(1).json";
 import { connect } from "react-redux";
-import { gsap, TweenMax, Power3 } from "gsap";
 import CollectionPreview from "../CollectionPreview/CollectionPreview";
 
 const Nav = (props) => {
@@ -29,27 +29,13 @@ const Nav = (props) => {
     getCollections();
   }, []);
 
-  // useEffect(() => {
-  //   gsap.from([menuSlide], 1, {
-  //     ease: Power3,
-  //     x: 180,
-  //   });
-  // }, [toggleMenu]);
-
-  // const slideMenu = () => {
-  //   TweenMax.to([menu], 1, {
-  //     delay: 2,
-  //     x: -180,
-  //   });
-  // };
-
   const getCollections = async () => {
-    try {
-      let res = await supabase.from("collections").select("*");
-      setCollections(res.body);
-    } catch (err) {
-      console.log(err);
-    }
+    axios
+      .get("/api/collections")
+      .then((res) => {
+        setCollections(res.data);
+      })
+      .catch((err) => console.log(err));
   };
 
   let randomName;
@@ -58,16 +44,13 @@ const Nav = (props) => {
     setName(randomName.word);
   }
 
+
   const createCollection = async () => {
-    try {
-      await supabase.from("collections").insert([{ collection_name: name }]);
-      let res = await supabase.from("collections").select("*");
-      await setIsAdding(false);
-      setCollections(res.body);
+    axios.post(`/api/collections`, { name }).then((res) => {
+      getCollections();
+      setIsAdding(false);
       setName("");
-    } catch (err) {
-      console.log(err);
-    }
+    });
   };
 
   const collectionsMap = collections.map((e) => {
