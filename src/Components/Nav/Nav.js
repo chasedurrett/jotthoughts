@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
 import "./Nav.css";
-import { createClient } from "@supabase/supabase-js";
 import { makeStyles } from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
 import Input from "@material-ui/core/Input";
@@ -13,9 +12,6 @@ import { connect } from "react-redux";
 import CollectionPreview from "../CollectionPreview/CollectionPreview";
 
 const Nav = (props) => {
-  const SUPABASE_URL = "https://kfvonrpponseevqsueft.supabase.co";
-  const { REACT_APP_SUPABASE_KEY } = process.env;
-  const supabase = createClient(SUPABASE_URL, REACT_APP_SUPABASE_KEY);
   const classes = useStyles();
   const classesLight = useStylesLight();
   let menuSlide = useRef(null);
@@ -43,7 +39,6 @@ const Nav = (props) => {
     randomName = data[Math.floor(Math.random() * data.length)];
     setName(randomName.word);
   }
-
 
   const createCollection = async () => {
     axios.post(`/api/collections`, { name }).then((res) => {
@@ -255,7 +250,7 @@ const useStyles = makeStyles((theme) => ({
     borderTopRightRadius: 15,
     borderBottomRightRadius: 15,
     "&:hover": {
-      backgroundColor: "#7289da73",
+      backgroundColor: 'none',
       borderTopRightRadius: 15,
       borderBottomRightRadius: 15,
     },
@@ -271,6 +266,11 @@ const useStyles = makeStyles((theme) => ({
     margin: "0",
     borderTopRightRadius: 15,
     borderBottomRightRadius: 15,
+    "&:hover": {
+      backgroundColor: 'none',
+      borderTopRightRadius: 15,
+      borderBottomRightRadius: 15,
+    },
   },
   input: {
     width: "70%",
@@ -307,7 +307,7 @@ const useStylesLight = makeStyles((theme) => ({
     borderTopRightRadius: 15,
     borderBottomRightRadius: 15,
     "&:hover": {
-      backgroundColor: "#7289da73",
+      backgroundColor: 'none',
       borderTopRightRadius: 15,
       borderBottomRightRadius: 15,
     },
@@ -323,6 +323,10 @@ const useStylesLight = makeStyles((theme) => ({
     margin: "0",
     borderTopRightRadius: 15,
     borderBottomRightRadius: 15,
+    "&:hover": {
+      backgroundColor: 'none',
+ 
+    },
   },
   input: {
     width: "70%",

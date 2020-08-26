@@ -52,5 +52,8 @@
     "webpack-cli": "^3.3.12"
   },
   "main": "server/index.js",
-  "proxy": "http://localhost:7777/"
+  "proxy": "http://localhost:7777/",
+  "engines": {
+    "node": "v12.18.3"
+  }
 }

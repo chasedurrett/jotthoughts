@@ -3,14 +3,10 @@ import "./Note.css";
 import Input from "@material-ui/core/Input";
 import { makeStyles } from "@material-ui/core/styles";
 import HighlightOffIcon from "@material-ui/icons/HighlightOff";
-import { createClient } from "@supabase/supabase-js";
 import axios from "axios";
 import { connect } from "react-redux";
 
 const Note = (props) => {
-  const SUPABASE_URL = "https://kfvonrpponseevqsueft.supabase.co";
-  const { REACT_APP_SUPABASE_KEY } = process.env;
-  const supabase = createClient(SUPABASE_URL, REACT_APP_SUPABASE_KEY);
   const { id, note_title, note_content } = props.note;
   const { deleteNote } = props;
   const classes = useStyles();
@@ -48,8 +44,6 @@ const Note = (props) => {
     editNote();
   };
 
-
-  
   return (
     <div
       className={

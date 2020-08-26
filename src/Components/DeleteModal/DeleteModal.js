@@ -8,7 +8,6 @@ const DeleteModal = (props) => {
   const [modalStyle] = useState(getModalStyle);
   const { handleClose, open, deleteCollection } = props;
 
-
   function getModalStyle() {
     const top = 50;
     const left = 50;
@@ -27,7 +26,12 @@ const DeleteModal = (props) => {
         Deleting a collection will delete all of its data
       </p>
       <div
-        style={{marginTop: 10, display: "flex", width: "90%", justifyContent: "flex-end" }}
+        style={{
+          marginTop: 10,
+          display: "flex",
+          width: "90%",
+          justifyContent: "flex-end",
+        }}
       >
         <Button
           variant='outlined'

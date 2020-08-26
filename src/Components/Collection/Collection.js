@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { createClient } from "@supabase/supabase-js";
 import "./Collection.css";
 import Input from "@material-ui/core/Input";
 import AddCircleIcon from "@material-ui/icons/AddCircle";
@@ -13,9 +12,6 @@ import Note from "../Note/Note";
 import SpeakerNotesIcon from "@material-ui/icons/SpeakerNotes";
 
 const Collection = (props) => {
-  const SUPABASE_URL = "https://kfvonrpponseevqsueft.supabase.co";
-  const { REACT_APP_SUPABASE_KEY } = process.env;
-  const supabase = createClient(SUPABASE_URL, REACT_APP_SUPABASE_KEY);
   const [collectionNotes, setCollectionNotes] = useState([]);
   const [isCreating, setIsCreating] = useState(false);
   const [title, setTitle] = useState("");
@@ -60,19 +56,6 @@ const Collection = (props) => {
       })
       .catch((err) => console.log(err));
   };
-
-  // const deleteNote = async (noteId) => {
-  //   try {
-  //     await supabase.from("notes").eq("id", `${noteId}`).delete();
-  //     let { body: notes } = await supabase
-  //       .from("notes")
-  //       .filter("collection_id", "eq", `${props.match.params.collectionid}`)
-  //       .select("*");
-  //     setCollectionNotes(notes);
-  //   } catch (err) {
-  //     console.log(err);
-  //   }
-  // };
 
   const deleteNote = (noteid) => {
     axios

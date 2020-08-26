@@ -5,7 +5,6 @@ import { Link } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
 import EditIcon from "@material-ui/icons/Edit";
-import { createClient } from "@supabase/supabase-js";
 import { withRouter } from "react-router-dom";
 import DeleteModal from "../DeleteModal/DeleteModal";
 import EditModal from "../EditModal/EditModal";
@@ -14,9 +13,6 @@ import axios from "axios";
 import "./CollectionPreview.css";
 
 const CollectionPreview = (props) => {
-  const SUPABASE_URL = "https://kfvonrpponseevqsueft.supabase.co";
-  const { REACT_APP_SUPABASE_KEY } = process.env;
-  const supabase = createClient(SUPABASE_URL, REACT_APP_SUPABASE_KEY);
   const classes = useStyles();
   const classesLight = useStylesLight();
   const { toggleDark, toggleMenu } = props;
@@ -61,7 +57,7 @@ const CollectionPreview = (props) => {
   };
 
   return (
-    <div>
+    <div style={{width: '100%'}}>
       {toggleMenu === true ? (
         <div onClick={onClick} className='collection-preview-container'>
           <Link className='collection-name-link' to={`/collections/${id}`}>
