@@ -5,6 +5,8 @@ const { SERVER_PORT } = process.env;
 app.use(express.json());
 const ctrl = require("./ctrl.js");
 
+app.use(express.static(`${__dirname}/../build`));
+
 // GET //
 app.get("/api/collections/:collectionid/notes", ctrl.getCollectionNotes);
 app.get(`/api/collections`, ctrl.getCollections);
